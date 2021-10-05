@@ -1,7 +1,10 @@
 package com.omsapi.controller;
 
+import com.omsapi.models.Request;
 import com.omsapi.models.User;
 import com.omsapi.models.dto.UserLoginDTO;
+import com.omsapi.repository.RequestRepository;
+import com.omsapi.service.RequestService;
 import com.omsapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +26,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    private RequestService requestService;
     @PostMapping
     public ResponseEntity<User> save(@RequestBody User user) {
         user = service.save(user);
@@ -38,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<User> findByID(Long id) {
+    public ResponseEntity<User> findById(Long id) {
         User user = service.findById(id);
         return ResponseEntity.ok(user);
     }
@@ -55,5 +59,12 @@ public class UserController {
         User user = service.login(loginDTO.getEmail(), loginDTO.getPassword());
 
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("{id}/requests")
+    public ResponseEntity<List<Request>> listAllRequestsById(@PathVariable Long id) {
+        List<Request> requests = requestService.listAllByOwnerId(id);
+
+        return ResponseEntity.ok(requests);
     }
 }
