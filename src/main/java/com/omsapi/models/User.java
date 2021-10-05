@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity(name = "user")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,9 +42,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-//    @OneToMany(mappedBy = "user")
-//    private List<Request> requests = new ArrayList<Request>();
-//
-//    @OneToMany(mappedBy = "user")
-//    private List<RequestStage> stages = new ArrayList<RequestStage>();
+    @OneToMany(mappedBy = "user")
+    private List<Request> requests = new ArrayList<Request>();
+
+    @OneToMany(mappedBy = "user")
+    private List<RequestStage> stages = new ArrayList<RequestStage>();
 }
