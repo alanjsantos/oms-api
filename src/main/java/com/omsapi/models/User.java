@@ -24,6 +24,7 @@ import java.util.List;
 @Setter
 @Entity(name = "user")
 public class User implements Serializable {
+    private static final long serialVersionUID = -3312344225072369743L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,9 +43,9 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "owner")
     private List<Request> requests = new ArrayList<Request>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "owner")
     private List<RequestStage> stages = new ArrayList<RequestStage>();
 }

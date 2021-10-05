@@ -26,6 +26,7 @@ import java.util.Date;
 @Setter
 @Entity(name = "request_stage")
 public class RequestStage implements Serializable {
+    private static final long serialVersionUID = -3838856804906447814L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,7 +48,7 @@ public class RequestStage implements Serializable {
     private Request request;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
 
 }

@@ -29,6 +29,7 @@ import java.util.List;
 @Setter
 @Entity(name = "request")
 public class Request implements Serializable {
+    private static final long serialVersionUID = 5394976703289088157L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,8 +50,8 @@ public class Request implements Serializable {
     private RequestState state;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
 
     @OneToMany(mappedBy = "request")
     private List<RequestStage> stages = new ArrayList<RequestStage>();
