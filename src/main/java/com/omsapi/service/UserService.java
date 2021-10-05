@@ -1,4 +1,4 @@
-package com.omsapi.models.service;
+package com.omsapi.service;
 
 import com.omsapi.models.User;
 import com.omsapi.repository.UserRepository;
