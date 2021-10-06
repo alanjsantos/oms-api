@@ -1,8 +1,10 @@
 package com.omsapi.controller;
 
 import com.omsapi.models.Request;
+import com.omsapi.models.RequestStage;
 import com.omsapi.models.User;
 import com.omsapi.service.RequestService;
+import com.omsapi.service.RequestStageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,9 @@ public class RequestController {
 
     @Autowired
     private RequestService service;
+
+    @Autowired
+    private RequestStageService requestStageService;
 
     @PostMapping
     public ResponseEntity<Request> save(@RequestBody Request request) {
@@ -50,6 +55,13 @@ public class RequestController {
         List<Request> requests = service.findAll();
 
         return ResponseEntity.ok(requests);
+    }
+
+    @GetMapping("{id}/request-stages")
+    public ResponseEntity<List<RequestStage>> listAllByRequestId(@PathVariable Long id) {
+        List<RequestStage> requestStage = requestStageService.listALlByRequestId(id);
+
+        return ResponseEntity.ok(requestStage);
     }
 
 }
