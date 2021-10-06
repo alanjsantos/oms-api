@@ -1,5 +1,6 @@
 package com.omsapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.omsapi.models.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,9 +44,11 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "owner")
     private List<Request> requests = new ArrayList<Request>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "owner")
     private List<RequestStage> stages = new ArrayList<RequestStage>();
 }

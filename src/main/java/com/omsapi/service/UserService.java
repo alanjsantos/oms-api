@@ -2,6 +2,7 @@ package com.omsapi.service;
 
 import com.omsapi.models.User;
 import com.omsapi.repository.UserRepository;
+import com.omsapi.service.exception.ObjectNotFoundException;
 import com.omsapi.utils.HasUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class UserService {
     public User findById(Long id) {
         Optional<User> result = repository.findById(id);
 
-        return result.get();
+        return result.orElseThrow(() -> new ObjectNotFoundException("User not found"));
     }
 
     public List<User> findAll() {
@@ -39,7 +40,7 @@ public class UserService {
 
     public User login(String email, String password) {
         password = HasUtil.getSecureHash(password);
-        Optional<User> result = repository.login(email, password);
+        Optional<User>result = repository.login(email, password);
         return result.get();
     }
 }
