@@ -38,9 +38,6 @@ public class RequestService {
     }
 
     public List<Request> listAllByOwnerId(Long id) {
-        if (id == null ){
-            throw new ObjectNotFoundException("ID Request NOT FOUND");
-        }
         return repository.findAllByOwnerId(id);
     }
 }

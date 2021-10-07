@@ -35,16 +35,16 @@ public class RequestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(request);
     }
 
-    @PutMapping("{id]")
+    @PutMapping("{id}")
     public ResponseEntity<Request> update(@RequestBody Request request, @PathVariable Long id) {
         request.setId(id);
         request = service.save(request);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(request);
+        return ResponseEntity.ok(request);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Request> findById(Long id) {
+    public ResponseEntity<Request> findById(@PathVariable Long id) {
         Request request = service.findById(id);
 
         return ResponseEntity.ok(request);
@@ -59,7 +59,7 @@ public class RequestController {
 
     @GetMapping("{id}/request-stages")
     public ResponseEntity<List<RequestStage>> listAllByRequestId(@PathVariable Long id) {
-        List<RequestStage> requestStage = requestStageService.listALlByRequestId(id);
+        List<RequestStage> requestStage = requestStageService.listALlByRequestStageId(id);
 
         return ResponseEntity.ok(requestStage);
     }

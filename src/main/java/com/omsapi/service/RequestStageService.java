@@ -22,19 +22,19 @@ public class RequestStageService {
 
     public RequestStage save(RequestStage requestStage) {
         requestStage.setRealizationDate(new Date());
-        RequestStage createdStage = repository.save(requestStage);
-        requestRepository.updateStatus(requestStage.getId(), requestStage.getState());
+        requestStage = repository.save(requestStage);
+        requestRepository.updateStatus(requestStage.getState(), requestStage.getId());
 
-        return createdStage;
+        return requestStage;
     }
 
     public RequestStage findById (Long id) {
         Optional<RequestStage> result = repository.findById(id);
 
-        return result.orElseThrow(() -> new ObjectNotFoundException("User not found"));
+        return result.orElseThrow(() -> new ObjectNotFoundException("Request Stages Not Found"));
     }
 
-    public List<RequestStage> listALlByRequestId(Long id) {
+    public List<RequestStage> listALlByRequestStageId(Long id) {
         return repository.findAllByRequestId(id);
     }
 }
