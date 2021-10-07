@@ -3,6 +3,7 @@ package com.omsapi.service;
 import com.omsapi.models.Request;
 import com.omsapi.models.enums.RequestState;
 import com.omsapi.repository.RequestRepository;
+import com.omsapi.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,9 @@ public class RequestService {
     }
 
     public List<Request> listAllByOwnerId(Long id) {
+        if (id == null ){
+            throw new ObjectNotFoundException("ID Request NOT FOUND");
+        }
         return repository.findAllByOwnerId(id);
     }
 }
